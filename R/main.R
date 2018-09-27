@@ -23,6 +23,7 @@ data.dir.url <- "/home/longwei/owncloudBOP/BOP/04-Photo-Analogies/PA#3/"
 
 ## -- functions
 source(file = "./R/get-clean-data/sla-to-photo-files-url.R")
+source(file = "./R/get-clean-data/make-save-thumbnail.R")
 
 
 ## =============================================================================
@@ -48,6 +49,15 @@ dF <- read_exif(photo.files$absolute.photo.files.url)
 ## -- merge both data table
 dF <- merge(x = photo.files, y = dF, by.x = "absolute.photo.files.url", by.y = "SourceFile")
 
+## =============================================================================
+## [2] Generate thumbnails
+## =============================================================================
+
+#makeSaveThumbnail(img.url.in = photo.files$absolute.photo.files.url[1], path.out = "./data/thumbnails/", thumb.type = "jpg", width = 300)
+
+thumblist <- lapply(X = photo.files$absolute.photo.files.url[1:20], FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 600)
+
+
 
 ## =============================================================================
 ## [2] Exploratory Analysis
@@ -56,6 +66,6 @@ g <- ggplot(data = dF) +
 	geom_point(
 		aes(x = ImageWidth, y = ImageHeight, col = as.factor(XResolution))
 	) +
-	facet_grid(facets = sla.file.name ~ ColorSpaceData + MIMEType)
+	facet_grid(facets = sla.filename ~ ColorSpaceData + MIMEType)
 g
 
