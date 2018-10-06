@@ -11,10 +11,11 @@
 ##      The summary of incident data with features as row
 ## -----------------------------------------------------------------------------
 makePhotoData <- reactive({
-        return(
-                MakePhotoSummary(dT = dF,
-                                    photo.ref = input$myPhotoRef)
-                )
+	return(
+		MakePhotoSummary(dT = dF,
+				 photo.ref = input$myPhotoRef,
+				 chapter.ref = input$myChapterRef)
+	)
 })
 
 
@@ -25,5 +26,5 @@ makePhotoData <- reactive({
 ## -- Key Report information
 ## -- Section "A"
 output$photoKeyInfo <- renderDT(
-        makePhotoData()
+	makePhotoData(), options = list(scrollX = TRUE, lengthMenu = c(5, 10, 20, 30, 50))
 )

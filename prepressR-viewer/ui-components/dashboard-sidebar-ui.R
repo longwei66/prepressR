@@ -19,10 +19,12 @@ dashboard_sidebar <-  dashboardSidebar(
                         
                         ## -- Search photos by filename
                         menuSubItem(
-                                "Single Photo",
+                                "Search Photo",
                                 tabName = "search-photo",
                                 icon = icon("search")
                         ),
+                        
+                        
                         ## -- Exploratory Analysis
                         menuSubItem(
                                 "Exploratory Analysis",

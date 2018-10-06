@@ -12,22 +12,38 @@ SearchPhoto <- tabItem(
                 ## Column 1 : filter on 1 Photo
                 ## -------------------------------------------------------------
                 column(
-                        width = 2,
+                        width = 3,
                         # Photo File Name selector
                         box(
-                                title = "Photo url #",
+                                title = "Chapter file url #",
                                 width = NULL,
                                 status = "info",
                                 solidHeader = TRUE,
                                 collapsible = TRUE,
                                 collapsed = FALSE,
                                 selectizeInput(
-                                        inputId = 'myPhotoRef',
+                                        inputId = 'myChapterRef',
                                         label = NULL,
                                         choices = NULL,
                                         multiple = TRUE)
                                 
                         ),
+                        box(
+                        	title = "Photo url #",
+                        	width = NULL,
+                        	status = "info",
+                        	solidHeader = TRUE,
+                        	collapsible = TRUE,
+                        	collapsed = FALSE,
+                        	selectizeInput(
+                        		inputId = 'myPhotoRef',
+                        		label = NULL,
+                        		choices = NULL,
+                        		multiple = TRUE)
+                        	
+                        ),
+                        
+                        
                         ## Value box with KPI of the incident
                         fluidRow(valueBoxOutput("photoIamgeWidth",width = 12))
                 ),
@@ -36,10 +52,10 @@ SearchPhoto <- tabItem(
                 ## Column 2 : dataviewer with tabs
                 ## -------------------------------------------------------------
                 column(
-                        width = 10,
+                        width = 9,
                         
                         box(
-                                title = "Photo Exif",
+                                title = "Exif Viewer (Extract)",
                                 width = NULL,
                                 status = "info",
                                 solidHeader = TRUE,
@@ -67,7 +83,7 @@ SearchPhoto <- tabItem(
                                 )
                         ),
                         box(
-                                title = "Cause analysis",
+                                title = "Exif Analyser",
                                 width = NULL,
                                 status = "warning",
                                 solidHeader = TRUE,
