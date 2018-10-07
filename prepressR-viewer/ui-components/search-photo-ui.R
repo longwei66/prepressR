@@ -104,7 +104,7 @@ SearchPhoto <- tabItem(
 					##  Tab : Operations
 					## -----------------------------
 					tabPanel(title = "Scatterplot",
-						 icon = icon("cogs"), #,
+						 icon = icon("tasks"), #,
 						 
 						 fluidRow(
 						 	
@@ -163,7 +163,10 @@ SearchPhoto <- tabItem(
 						 			multiple = TRUE)
 						 	)
 						 	
-						 	)
+						 	),
+						 fluidRow(
+						 	plotlyOutput("exifGgExplorer")
+						 )
 					)
 				)
 				

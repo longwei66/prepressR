@@ -1,14 +1,5 @@
 ## -----------------------------------------------------------------------------
-## Reactive function : ({ makeIncidentData )}
 ##
-## Parameters : 
-##      hzLiquid - a data.table with incident data
-##      hzLiquidCodeBook - a data.table the associated codebook
-##      input$myIncidentRef - the REPORT_NUMBER vector used in input
-## Require :
-##      MakeIncidentSummary function
-## Returns :
-##      The summary of incident data with features as row
 ## -----------------------------------------------------------------------------
 makePhotoData <- reactive({
 	return(
@@ -16,6 +7,21 @@ makePhotoData <- reactive({
 				 photo.ref = input$myPhotoRef,
 				 chapter.ref = input$myChapterRef)
 	)
+})
+
+makeGgExif <- reactive({
+	## Get data with input filters applied
+	data <- makePhotoData()
+	
+	#plot_ly(makePhotoData(), x = ~XResolution, y = ~YResolution)
+	## return the ggplot graph
+	g <- ggplot(data)
+	## X & Y Axis
+	g <- g + geom_point(aes_string(x = input$ggXaxis,
+				       y = input$ggYaxis,
+				       size = input$ggSize,
+				       shape = input$ggShape))
+	return(ggplotly(g))
 })
 
 
@@ -28,3 +34,8 @@ makePhotoData <- reactive({
 output$photoKeyInfo <- renderDT(
 	makePhotoData(), options = list(scrollX = TRUE, lengthMenu = c(5, 10, 20, 30, 50))
 )
+
+
+output$exifGgExplorer <- renderPlotly({
+	makeGgExif()
+})

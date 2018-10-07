@@ -10,6 +10,8 @@ library(data.table)
 library(shinydashboard)
 library(shinyjs)
 library(DT)
+library(ggplot2)
+library(plotly)
 
 
 
