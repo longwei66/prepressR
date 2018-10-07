@@ -17,6 +17,7 @@ library(DT)
 
 ## Load functions
 source("./R/make-photo-summary.R")
+source("./R/generate-menulist-exploratory.R")
 
 ## Load functions
 source("./R/load-data.R")
