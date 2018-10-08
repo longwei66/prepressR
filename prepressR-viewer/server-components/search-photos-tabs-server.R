@@ -21,6 +21,24 @@ makeGgExif <- reactive({
 				       y = input$ggYaxis,
 				       size = input$ggSize,
 				       shape = input$ggShape))
+	
+	## Facets
+	if( is.null(input$ggFaceth) & is.null(input$ggFacetv )){ 
+		## do nothing
+	} else {
+		## adjust the right fact forumula
+		if( !is.null(input$ggFaceth) & !is.null(input$ggFacetv) ){
+			facet.formula = paste0(input$ggFaceth, " ~ ", input$ggFacetv )	
+		} else {
+			if(is.null(input$ggFaceth)) {
+				facet.formula = paste0(". ~", input$ggFacetv )	
+			} else {
+				facet.formula = paste0(input$ggFaceth, " ~ .")	
+			}
+		}
+		g <- g + facet_grid(facets = as.formula(facet.formula))	
+	}
+	
 	return(ggplotly(g))
 })
 
