@@ -18,7 +18,7 @@ function(input, output, session) {
         source('./server-components/generate-inputs-server.R', local = TRUE)
         source('./server-components/search-photos-tabs-server.R', local = TRUE)
         source('./server-components/search-photos-boxes-server.R', local = TRUE)
-        
+	source("./server-components/search-photos-boxes-server.R", local = TRUE)
         
         
         hide(id = "loading_page")

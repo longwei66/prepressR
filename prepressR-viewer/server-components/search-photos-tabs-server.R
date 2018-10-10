@@ -48,12 +48,27 @@ makeGgExif <- reactive({
 ## =============================================================================
 
 ## -- Key Report information
-## -- Section "A"
 output$photoKeyInfo <- renderDT(
 	makePhotoData(), options = list(scrollX = TRUE, lengthMenu = c(5, 10, 20, 30, 50))
 )
 
-
+## -- ggplotly explorer
 output$exifGgExplorer <- renderPlotly({
 	makeGgExif()
 })
+
+## -- thumbnails
+output$thumbnails <- renderImage({
+	data <- makePhotoData()
+	if (is.null(data)) {
+		return(NULL)
+	}
+
+	return(list(
+		src = data$thumbnail.url[1],
+		filetype = data$MIMEType[1],
+		alt = data$FileName[1]
+	))
+
+}, deleteFile = FALSE)
+
