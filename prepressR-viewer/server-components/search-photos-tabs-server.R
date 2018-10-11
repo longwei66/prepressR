@@ -63,12 +63,29 @@ output$thumbnails <- renderImage({
 	if (is.null(data)) {
 		return(NULL)
 	}
-
+	
 	return(list(
 		src = data$thumbnail.url[1],
 		filetype = data$MIMEType[1],
 		alt = data$FileName[1]
 	))
-
+	
 }, deleteFile = FALSE)
 
+## Loop to build UI for thumbnails
+output$thumbnailsTable<- renderUI({
+	## Get filtered data based on menu inputs
+	data <- (makePhotoData())
+	## Build a functiont to render Image
+	viewImage <- function(df,i){
+		box(
+			renderImage({list(
+				src = df$thumbnail.url[i],
+				filetype = df$MIMEType[i],
+				alt = df$FileName[i]
+			)}),
+			renderText(df$FileName[i]))
+	}
+	## loop in all images selected
+	lapply(1:nrow(data), function(i){viewImage(data,i)})
+})

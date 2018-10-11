@@ -86,8 +86,11 @@ SearchPhoto <- tabItem(
 					## -----------------------------
 					tabPanel(title = "Thumbnail",
 						 icon = icon("image"),
-						 imageOutput("thumbnails")
+						 #imageOutput("thumbnails")
+						 # UI output
+						 uiOutput("thumbnailsTable")
 					)
+					
 				)
 			),
 			box(
@@ -171,7 +174,7 @@ SearchPhoto <- tabItem(
 						 			multiple = TRUE)
 						 	)
 						 	
-						 	),
+						 ),
 						 fluidRow(
 						 	plotlyOutput("exifGgExplorer")
 						 )
