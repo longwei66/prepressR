@@ -55,12 +55,12 @@ dF <- merge(x = photo.files, y = dF, by.x = "absolute.photo.files.url", by.y = "
 
 #makeSaveThumbnail(img.url.in = photo.files$absolute.photo.files.url[1], path.out = "./data/thumbnails/", thumb.type = "jpg", width = 300)
 
-thumblist <- lapply(X = photo.files$absolute.photo.files.url[1:20], FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 600)
+thumblist <- lapply(X = photo.files$absolute.photo.files.url[1:50], FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 200)
 
 ## -- Add Thumbnails url to dF (faster to display later)
 ## -- to debug with 20 photos
 dF[ , thumbnail.url := ""]
-dF[ 1:20 , thumbnail.url := unlist(thumblist)]
+dF[ , thumbnail.url := unlist(thumblist)]
 
 ## -- to uncomment for production script
 ## dF[ 1:20 , thumbnail.url := unlist(thumblist)]
