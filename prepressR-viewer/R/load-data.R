@@ -1,10 +1,10 @@
 load_data <- function() {
 	## We sored the photo list and full exit in an R object we load
-        load(file = "../data/dF.Rda", envir = .GlobalEnv)
+        load(file = "../data/pa-photo-db.Rda", envir = .GlobalEnv)
 	
 	## We use a hash for the TRC as it is in base64 and too big ...
 	## spooky.32 is our friend
-	dF[ , ':=' (
+	pa.photo.db[ , ':=' (
 		RedTRC = sapply(as.list(RedTRC), hashFunction::spooky.32),
 		GreenTRC = sapply(as.list(RedTRC), hashFunction::spooky.32),
 		BlueTRC = sapply(as.list(RedTRC), hashFunction::spooky.32),
@@ -15,7 +15,7 @@ load_data <- function() {
 	mergeListInDT <- function(x) {
 		return(paste0(x, collapse = "|| "))
 	}
-	dF[ , ':=' (
+	pa.photo.db[ , ':=' (
 		Keywords = sapply(Keywords, mergeListInDT),
 		Subject = sapply(Subject, mergeListInDT),
 		ToneCurve = sapply(ToneCurve, mergeListInDT),
@@ -35,7 +35,7 @@ load_data <- function() {
 	keep.col <<- read.csv(file = "../data/codebook.csv", header = FALSE)
 	selectcol <- keep.col[,2] %in% c(1)
 	
-	## We store the dF object in the global environment to be accessible
+	## We store the pa.photo.db object in the global environment to be accessible
 	## from the shiny app
-	dF <<- dF[,..selectcol]
+	pa.photo.db <<- pa.photo.db[,..selectcol]
 }

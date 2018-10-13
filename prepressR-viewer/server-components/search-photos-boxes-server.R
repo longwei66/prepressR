@@ -6,7 +6,7 @@
 output$photoIamgeWidth <- renderValueBox({
         valueBox(
                 subtitle = "Image Width", 
-                value =  mean(dF[ absolute.photo.files.url %in% input$myPhotoRef, ImageWidth]),
+                value =  mean(pa.photo.db[ absolute.photo.files.url %in% input$myPhotoRef, ImageWidth]),
                 color = "red",
                 #fill = 
                 icon = icon("user", lib = "glyphicon")

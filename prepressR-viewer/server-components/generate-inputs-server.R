@@ -2,8 +2,8 @@
 ## Generate UI elements for Explorer
 ## =============================================================================
 getPhotoExplorer <- reactive({
-        myPhotos <- as.character(unique(dF$absolute.photo.files.url))
-        myChapters <- as.character(unique(dF$sla.filename))
+        myPhotos <- as.character(unique(pa.photo.db$absolute.photo.files.url))
+        myChapters <- as.character(unique(pa.photo.db$sla.filename))
         
         return(
                 list(
@@ -13,7 +13,7 @@ getPhotoExplorer <- reactive({
         )
 })
 getGgplotDimensions <- reactive({
-	features <- generateFeaturesList(dF)
+	features <- generateFeaturesList(pa.photo.db)
 	
 	return(
 		list(

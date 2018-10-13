@@ -79,20 +79,19 @@ SearchPhoto <- tabItem(
 					tabPanel(title = "Key Information",
 						 icon = icon("key"),
 						 DTOutput("photoKeyInfo")
-					),
-					
-					## -----------------------------
-					##  Tab : Thumbnail
-					## -----------------------------
-					tabPanel(title = "Thumbnail",
-						 icon = icon("image"),
-						 #imageOutput("thumbnails")
-						 # UI output
-						 uiOutput("thumbnailsTable")
 					)
-					
 				)
 			),
+			box(
+				title = "Thumbnails",
+				width = NULL,
+				status = "primary",
+				solidHeader = TRUE,
+				collapsible = TRUE,
+				collapsed = TRUE,    
+				uiOutput("thumbnailsTable")
+				),
+			
 			box(
 				title = "Exif Analyser",
 				width = NULL,

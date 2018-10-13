@@ -3,7 +3,7 @@
 ## -----------------------------------------------------------------------------
 makePhotoData <- reactive({
 	return(
-		MakePhotoSummary(dT = dF,
+		MakePhotoSummary(dT = pa.photo.db,
 				 photo.ref = input$myPhotoRef,
 				 chapter.ref = input$myChapterRef)
 	)
@@ -78,13 +78,15 @@ output$thumbnailsTable<- renderUI({
 	data <- (makePhotoData())
 	## Build a functiont to render Image
 	viewImage <- function(df,i){
-		box(
+		box( 
+			footer = renderText(df$FileName[i]),
+			status = "warning",
 			renderImage({list(
 				src = df$thumbnail.url[i],
 				filetype = df$MIMEType[i],
 				alt = df$FileName[i]
-			)}),
-			renderText(df$FileName[i]))
+			)})
+		)
 	}
 	## loop in all images selected
 	lapply(1:nrow(data), function(i){viewImage(data,i)})

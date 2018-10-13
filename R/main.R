@@ -17,6 +17,8 @@ library(tidyverse)
 library(exifr)
 library(data.table)
 library(xml2)
+library(magick)
+library(dplyr)
 
 ## -- config
 data.dir.url <- "/home/longwei/owncloudBOP/BOP/04-Photo-Analogies/PA#3/"
@@ -39,28 +41,31 @@ sla.files <- list.files(path = data.dir.url,
 
 ## -- extract photofiles url for each sla.file
 ## -- using apply, get a list, binded by row with rbindlist
-photo.files <- rbindlist(lapply(sla.files, slaToPhotoFilesUrl))
+photo.files <- rbindlist(lapply(sla.files, slaToPhotoFilesUrl)) 
+
+
 ## -- add absolute url and sla file name
-photo.files[ , absolute.photo.files.url := paste0(data.dir.url,photo.files.url)]
+photo.files[ , absolute.photo.files.url := paste0(data.dir.url, photo.files.url)]
 photo.files[ , sla.filename := gsub(pattern = ".*/(.*)$", replacement = "\\1", x = photo.files$sla.file.url)]
 ## -- read exif metada for each file
 dF <- read_exif(photo.files$absolute.photo.files.url)
 
 ## -- merge both data table
-dF <- merge(x = photo.files, y = dF, by.x = "absolute.photo.files.url", by.y = "SourceFile")
+pa.photo.db <- merge(x = photo.files, y = dF, by.x = "absolute.photo.files.url", by.y = "SourceFile")
 
 ## =============================================================================
 ## [2] Generate thumbnails
 ## =============================================================================
 
-#makeSaveThumbnail(img.url.in = photo.files$absolute.photo.files.url[1], path.out = "./data/thumbnails/", thumb.type = "jpg", width = 300)
-
-thumblist <- lapply(X = photo.files$absolute.photo.files.url[1:50], FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 200)
+thumblist <- lapply(X = pa.photo.db$absolute.photo.files.url, FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 300)
 
 ## -- Add Thumbnails url to dF (faster to display later)
 ## -- to debug with 20 photos
-dF[ , thumbnail.url := ""]
-dF[ , thumbnail.url := unlist(thumblist)]
+pa.photo.db[ , thumbnail.url := ""]
+pa.photo.db[ , thumbnail.url := unlist(thumblist)]
+
+## -- Save data
+save(pa.photo.db, file = './data/pa-photo-db.Rda')
 
 ## -- to uncomment for production script
 ## dF[ 1:20 , thumbnail.url := unlist(thumblist)]
