@@ -1,6 +1,8 @@
 load_data <- function() {
 	## We sored the photo list and full exit in an R object we load
-        load(file = "../data/pa-photo-db.Rda", envir = .GlobalEnv)
+        load(file = "./data/pa-photo-db.Rda", envir = .GlobalEnv)
+	
+	message("@@@@@ DEBUG")
 	
 	## We use a hash for the TRC as it is in base64 and too big ...
 	## spooky.32 is our friend
@@ -32,7 +34,7 @@ load_data <- function() {
 	
 	## We don't want to keep all features, the list to keep is stored
 	## in a csv
-	keep.col <<- read.csv(file = "../data/codebook.csv", header = FALSE)
+	keep.col <<- read.csv(file = "./data/codebook.csv", header = FALSE)
 	selectcol <- keep.col[,2] %in% c(1)
 	
 	## We store the pa.photo.db object in the global environment to be accessible

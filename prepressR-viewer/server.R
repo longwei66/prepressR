@@ -4,14 +4,9 @@
 function(input, output, session) {
 
 
-        withProgress(message = 'Loading data',
-                     detail = 'This may take a while...', 
-                     value = 0, {
-                             incProgress(amount = 1/2, detail = 'Connecting to Database')
-                             load_data()
-                             incProgress(amount = 1/2, detail = 'Cleaning')
-                     })
-        
+
+        load_data()
+
         
         # Load the different functions of the dashboard w/m/y
         # ------------------------------------------------------------

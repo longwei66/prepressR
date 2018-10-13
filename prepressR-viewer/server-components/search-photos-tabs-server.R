@@ -16,6 +16,7 @@ makeGgExif <- reactive({
 	#plot_ly(makePhotoData(), x = ~XResolution, y = ~YResolution)
 	## return the ggplot graph
 	g <- ggplot(data)
+	
 	## X & Y Axis
 	g <- g + geom_point(aes_string(x = input$ggXaxis,
 				       y = input$ggYaxis,
