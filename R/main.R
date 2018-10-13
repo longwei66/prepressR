@@ -57,7 +57,7 @@ pa.photo.db <- merge(x = photo.files, y = dF, by.x = "absolute.photo.files.url",
 ## [2] Generate thumbnails
 ## =============================================================================
 
-thumblist <- lapply(X = pa.photo.db$absolute.photo.files.url, FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 300)
+thumblist <- lapply(X = pa.photo.db$absolute.photo.files.url, FUN = makeSaveThumbnail, path.out = "./data/thumbnails/", thumb.type = "jpg", width = 250)
 
 ## -- Add Thumbnails url to dF (faster to display later)
 ## -- to debug with 20 photos

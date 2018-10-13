@@ -37,21 +37,7 @@ source("./ui-components/exploratory-analysis.R", local = TRUE)
 ## -----------------------------------------------------------------------------
 ui <- div(
         
-        ## Show loading message while loading data
-        useShinyjs(),
-        
-        
         div(
-                id = "loading_page",
-                dashboardPage(
-                        skin = "black",
-                        dashboardHeader(title = "Loading data, please wait"),
-                        dashboardSidebar(),
-                        dashboardBody()
-                )
-        ),
-        hidden(
-                div(
                         id = "main_content",
                         dashboardPage(
                                 skin = "purple",
@@ -68,6 +54,5 @@ ui <- div(
                                 dashboard_body
                         )
                 )
-        )
-        
+
 )

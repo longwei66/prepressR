@@ -78,14 +78,18 @@ output$thumbnailsTable<- renderUI({
 	data <- (makePhotoData())
 	## Build a functiont to render Image
 	viewImage <- function(df,i){
+		message(df$FileName[i])
 		box( 
-			footer = renderText(df$FileName[i]),
+			#footer = renderText(df$FileName[i]),
+			title = df$FileName[i],
+			footer = df$thumbnail.url[i],
 			status = "warning",
 			renderImage({list(
 				src = df$thumbnail.url[i],
 				filetype = df$MIMEType[i],
 				alt = df$FileName[i]
-			)})
+			)},
+			deleteFile = FALSE)
 		)
 	}
 	## loop in all images selected
